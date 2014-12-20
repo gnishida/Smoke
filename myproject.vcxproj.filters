@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\shader">
+      <UniqueIdentifier>{9bec2e07-b057-490a-ac8e-2c0d63c5baee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shader\fs">
+      <UniqueIdentifier>{74423de2-6993-44ae-b835-8813402190a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shader\gs">
+      <UniqueIdentifier>{14f5adaf-4e8a-4104-9c2d-e862a3269cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shader\vs">
+      <UniqueIdentifier>{408c2a54-917d-411e-97ae-89af06ad5430}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GPGPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GPGPU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\vs\fluidvs.glsl">
+      <Filter>Resource Files\shader\vs</Filter>
+    </None>
+    <None Include="shader\vs\rayboxintersectvs.glsl">
+      <Filter>Resource Files\shader\vs</Filter>
+    </None>
+    <None Include="shader\vs\raycastvs.glsl">
+      <Filter>Resource Files\shader\vs</Filter>
+    </None>
+    <None Include="shader\fs\advectfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\boundaryfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\buoyancyfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\divergencefs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\forcefs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\jacobifs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\rayboxintersectfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\raycastfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\fs\subgradientfs.glsl">
+      <Filter>Resource Files\shader\fs</Filter>
+    </None>
+    <None Include="shader\gs\fluidgs.glsl">
+      <Filter>Resource Files\shader\gs</Filter>
+    </None>
+  </ItemGroup>
+</Project>
