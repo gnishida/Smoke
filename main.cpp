@@ -10,8 +10,8 @@
 #include <iostream>
 #include "GPGPU.h"
 
-static int winWidth = 512;
-static int winHeight = 512;
+static int winWidth = 256;//512;
+static int winHeight = 256;//512;
 static int winId = -1;
 static GLUI *glui;
 
@@ -67,7 +67,7 @@ void simulation_start_button_pressed(int control)
 		VelocityDissipation_spinner->set_float_val(0.99);
 		DensityDissipation_spinner->set_float_val(0.99);
 		TimeStep_spinner->set_float_val(0.4);
-		NumJacobiIterations_spinner->set_float_val(20);
+		NumJacobiIterations_spinner->set_float_val(5);
 		Buoyancy_spinner->set_float_val(1.0);
 		Weight_spinner->set_float_val(0.3);
 		forceRadius_spinner->set_float_val(3.0);
