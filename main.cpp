@@ -51,13 +51,7 @@ extern float forceRadius;
 extern float forceTemperature;
 extern float forceDensity;
 
-void loadVTK(char* filename) {
-	FILE* fp = fopen(filename, "r");
 
-	
-
-	fclose(fp);
-}
 
 void reset_button_pressed(int control)
 {
@@ -271,9 +265,6 @@ mouseCB(int button, int state, int x, int y)
 int
 main(int argc, char *argv[])
 {
-	loadVTK("delta.vtk");
-
-
 	// init OpenGL/GLUT
 	glutInit(&argc, argv);
 	

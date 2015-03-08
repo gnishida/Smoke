@@ -268,8 +268,7 @@ void GPGPU::renderScene(){
 	glActiveTexture(GL_TEXTURE1); glBindTexture(GL_TEXTURE_2D, _cubeinterFBO.texture[1]);
 
 	// 密度データを格納した3Dテクスチャを、テクスチャ２として使用する
-	//glActiveTexture(GL_TEXTURE2); glBindTexture(GL_TEXTURE_3D, dataman.data.Density.cur.texture);
-	glActiveTexture(GL_TEXTURE2); glBindTexture(GL_TEXTURE_3D, dataman.data.Test.texture);
+	glActiveTexture(GL_TEXTURE2); glBindTexture(GL_TEXTURE_3D, dataman.data.Density.cur.texture);
 
 	// 温度データを格納した3Dテクスチャを、テクスチャ３として使用する
 	glActiveTexture(GL_TEXTURE3); glBindTexture(GL_TEXTURE_3D, dataman.data.Temperature.cur.texture); 
