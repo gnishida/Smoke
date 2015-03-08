@@ -12,6 +12,8 @@ void DataManager::createData(GLsizei width, GLsizei height, GLsizei depth){
 	data.Temperature = createDuoDataVolume(1);
 
 	data.Divergence = createSingleDataVolume(3);
+
+	data.Test = createCloudVolumeData(_gridWidth, _gridHeight, _gridDepth);
 }
 
 /**
@@ -197,5 +199,74 @@ CubeIntersectFBO DataManager::cubeIntersectFBO(GLsizei width, GLsizei height)
     return cubefbo;
 }
 
+/**
+ * FBOと、対応する、指定した幅、高さ、奥行きの3Dテクスチャを生成し、
+ * 雲みたいなやつをセットする。
+ *
+ * @param width				幅
+ * @param height			高さ
+ * @param depth				奥行き
+ * @param numComponents		コンポーネントの数 (各テクセルがscalarなら1、RGBベクトルなら3）
+ * @return					FBOと対応する3Dテクスチャを返却する。
+ */
+DataVolume DataManager::createCloudVolumeData(GLsizei width, GLsizei height, GLsizei depth){
+	// 雲データの作成
+	float sigma = (float)width * 0.3;
+	float* data = new float[width * height * depth];
+	for (int x = 0; x < width; ++x) {
+		for (int y = 0; y < height; ++y) {
+			for (int z = 0; z < depth; ++z) {
+				float dist = (x - width * 0.5) * (x - width * 0.5)  + (y - height * 0.5) * (y - height * 0.5) + (z - depth * 0.5) * (z - depth * 0.5);
+				
+				if (dist < sigma * sigma) {
+					data[z * width * height + y * width + x] = expf(-dist/2.0/sigma/sigma);
+				} else {
+					data[z * width * height + y * width + x] = 0.0f;
+				}
+			}
+		}
+	}
 
+	//the FBO
+	GLuint fboId;
+	glGenFramebuffers(1, &fboId);
+	glBindFramebuffer(GL_FRAMEBUFFER, fboId);
+
+	// 3Dテクスチャを生成
+	GLuint textureId;
+	glGenTextures(1, &textureId);
+
+	// 生成した3Dテクスチャのパラメータを設定する
+	glBindTexture(GL_TEXTURE_3D, textureId);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// 3Dテクスチャ用のメモリを確保する
+    glTexImage3D(GL_TEXTURE_3D, 0, GL_R16F, width, height, depth, 0, GL_RED, GL_FLOAT, data);
+    if(GL_NO_ERROR != glGetError()){std::cout<<"Unable to create 3D texture"<<std::endl;}
+
+	delete [] data;
+
+	// 生成した3Dテクスチャを、fboに括り付ける。
+	// 以後、OpenGLに対しては、fboを指定することで、この3Dテクスチャにアクセスできるようになる。
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, textureId, 0);
+
+    if(GL_NO_ERROR != glGetError()){std::cout<<"Unable to bind texture to fbo"<<std::endl;}
+
+    DataVolume dataVolume = {fboId, textureId};
+
+	// 以下の初期化は、不要だった。
+	// こいつのせいで、せっかくセットしたテクスチャが全部消えちゃっていた。
+    //init the texture as black color(value 0)
+    //glClearColor(0, 0, 0, 0);
+    //glClear(GL_COLOR_BUFFER_BIT);
+
+	// 出力先をスクリーンに戻す
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    return dataVolume;
+}
 

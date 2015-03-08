@@ -30,6 +30,8 @@ struct RenderData {
 
     //single data
     DataVolume Divergence;
+
+	DataVolume Test;
 };
 
 class DataManager
@@ -53,4 +55,5 @@ private:
 	DuoDataVolume createDuoDataVolume(int numComponents);
 	DataVolume createSingleDataVolume(int numComponents);
 	DataVolume createVolumeData(GLsizei width, GLsizei height, GLsizei depth, int numComponents);
+	DataVolume createCloudVolumeData(GLsizei width, GLsizei height, GLsizei depth);
 };
